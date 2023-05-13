@@ -4,7 +4,7 @@ import { Button, Divider, Text } from "react-native-paper";
 import { Routes } from "../../../router/const";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { List } from "react-native-paper";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 export const TemplateList = (props: any) => {
   const [results, setResults] = React.useState<Array<string>>([]);
@@ -50,13 +50,6 @@ export const TemplateList = (props: any) => {
         ))}
       </Stack>
       <Stack space={4} align="center" paddingBottom={24}>
-        <Button
-          style={{ width: 200 }}
-          mode="contained"
-          onPress={() => props.navigation.navigate(Routes.PRESENT)}
-        >
-          Present
-        </Button>
         <Button
           mode="contained"
           style={{ width: 200 }}

@@ -15,7 +15,7 @@ export const Navigation = () => {
         header: ({ navigation, back }) => (
           <Appbar.Header>
             {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-            <Appbar.Content title="My awesome app" />
+            <Appbar.Content title="News Displayer" />
           </Appbar.Header>
         ),
       }}

@@ -18,28 +18,6 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { toast } from "react-toastify";
 import { Template } from "../../../types/template";
 
-const calculateTimeLeft = (initialTime: number) => {
-  let difference = initialTime - +new Date();
-
-  let timeLeft: {
-    hours: number;
-    minutes: number;
-    seconds: number;
-    days: number;
-  } = {} as any;
-
-  if (difference > 0) {
-    timeLeft = {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((difference / 1000 / 60) % 60),
-      seconds: Math.floor((difference / 1000) % 60),
-    };
-  }
-
-  return timeLeft;
-};
-
 function remainingTimeUntilNextSunday(): { minutes: number; seconds: number } {
   const now = new Date();
   const sunday = new Date(
@@ -58,27 +36,37 @@ function remainingTimeUntilNextSunday(): { minutes: number; seconds: number } {
 }
 
 const Timer = () => {
-  //const initialTime = React.useRef(dateTimeNextSunday());
   const [timeLeft, setTimeLeft] = React.useState(
-    //calculateTimeLeft(initialTime.current)
     remainingTimeUntilNextSunday()
   );
 
   React.useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeLeft(
-        /*calculateTimeLeft(initialTime.current)*/ remainingTimeUntilNextSunday()
-      );
+      setTimeLeft(remainingTimeUntilNextSunday());
     }, 1000);
     return () => {
       clearTimeout(timer);
     };
   });
 
+  if (timeLeft.minutes <= 0 && timeLeft.seconds <= 0) {
+    return (
+      <Text
+        variant="displayLarge"
+        style={{ color: "white", fontWeight: "bold" }}
+      >
+        C'est parti !
+      </Text>
+    );
+  }
+
   return (
-    <Text variant="headlineMedium" style={{ color: "white" }}>
-      {timeLeft.minutes > 0 ? `${timeLeft.minutes} min` : "0 min"}{" "}
-      {timeLeft.seconds} s
+    <Text
+      variant={timeLeft.minutes > 0 ? "displayMedium" : "displayLarge"}
+      style={{ color: "white" }}
+    >
+      {timeLeft.minutes > 0 ? `${timeLeft.minutes} min` : ""} {timeLeft.seconds}{" "}
+      s
     </Text>
   );
 };
@@ -187,8 +175,8 @@ export const Present = (props: any) => {
                 >
                   <Rive
                     style={{
-                      minHeight: 300,
-                      minWidth: 300,
+                      minHeight: 400,
+                      minWidth: 400,
                     }}
                     src="countdown.riv"
                   />
