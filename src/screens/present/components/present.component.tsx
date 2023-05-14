@@ -23,7 +23,7 @@ function remainingTimeUntilNextSunday(): { minutes: number; seconds: number } {
   const sunday = new Date(
     now.getFullYear(),
     now.getMonth(),
-    now.getDate() + (7 - now.getDay()),
+    now.getDate(),
     10,
     15,
     0,
