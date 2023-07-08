@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Stack } from "@mobily/stacks";
 import { Button, Divider, Text } from "react-native-paper";
+import { useArticle } from '../hooks/use.article'
 import { Routes } from "../../../router/const";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { List } from "react-native-paper";
@@ -71,35 +72,11 @@ const Timer = () => {
   );
 };
 
-class TemplateModel {
-  public template: Template;
-
-  constructor(templateString: string) {
-    const object = JSON.parse(templateString);
-    this.template = object;
-  }
-}
 
 export const Present = (props: any) => {
   const handle = useFullScreenHandle();
-  const [model, setTemplate] = React.useState<TemplateModel>();
 
-  console.log("Present");
-
-  React.useEffect(() => {
-    if (props.route.params) {
-      const { templateId } = props.route.params;
-      AsyncStorage.getItem(templateId)
-        .then((value) => {
-          if (value) {
-            setTemplate(new TemplateModel(value));
-          }
-        })
-        .catch((err) => {
-          toast.error(JSON.stringify(err));
-        });
-    }
-  }, []);
+  const { article } = useArticle(props.route.params.templateId);
 
   return (
     <Box
@@ -139,12 +116,12 @@ export const Present = (props: any) => {
                 }}
                 startDelay={1}
                 cursorColor="#3F3D56"
-                multiText={model?.text.split("\n")}
+                multiText={article?.text.split("\n")}
                 multiTextDelay={3000}
                 typeSpeed={30}
               /> */}
 
-              {model?.template.sections.map((s) => (
+              {article?.template.sections.map((s) => (
                 <Stack space={8} style={{ marginTop: 50 }}>
                   <Text variant="displayMedium" style={{ fontWeight: "bold" }}>
                     {s.title}
@@ -152,20 +129,20 @@ export const Present = (props: any) => {
                   <Stack space={8}>
                     {s.content != null
                       ? s.content.split("\n").map((text) =>
-                          text !== "" ? (
-                            <Text
-                              style={{ marginLeft: 50 }}
-                              variant="displaySmall"
-                            >
-                              ➡️ {text}
-                            </Text>
-                          ) : null
-                        )
+                        text !== "" ? (
+                          <Text
+                            style={{ marginLeft: 50 }}
+                            variant="displaySmall"
+                          >
+                            ➡️ {text}
+                          </Text>
+                        ) : null
+                      )
                       : null}
                   </Stack>
                 </Stack>
               ))}
-              {model?.template.showTimer && (
+              {article?.template.showTimer && (
                 <View
                   style={{
                     justifyContent: "center",

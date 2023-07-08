@@ -2,28 +2,24 @@ import React from "react";
 import { Box, Stack } from "@mobily/stacks";
 import { Button, Divider, Text } from "react-native-paper";
 import { Routes } from "../../../router/const";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { List } from "react-native-paper";
 import { TouchableOpacity } from "react-native";
+import { supabase } from "../../../supabase";
+import { toast } from "react-toastify";
+import { useArticlesTitle } from "../hooks/use.articles";
 
 export const TemplateList = (props: any) => {
-  const [results, setResults] = React.useState<Array<string>>([]);
 
-  React.useEffect(() => {
-    AsyncStorage.getAllKeys((error, results) => {
-      if (results) {
-        setResults(results as string[]);
-      }
-    });
-  }, []);
-
+  const { results, loadArticlesTitle } = useArticlesTitle();
   const removeItem = (name: string) => {
-    AsyncStorage.removeItem(name, () => {
-      AsyncStorage.getAllKeys((error, results) => {
-        if (results) {
-          setResults(results as string[]);
-        }
-      });
+    supabase.from("Article").delete().eq("title", name).then(res => {
+      if (res.error) {
+        toast.error(res.error.message);
+      }
+      else {
+        loadArticlesTitle();
+        toast.success("L'article a été supprimé.")
+      }
     });
   };
 

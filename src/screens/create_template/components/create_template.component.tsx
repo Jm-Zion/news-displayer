@@ -13,6 +13,7 @@ import { Routes } from "../../../router/const";
 import { Alert, ScrollView, View, Switch } from "react-native";
 import { toast } from "react-toastify";
 import { Template } from "../../../types/template";
+import { supabase } from "../../../supabase";
 
 export const CreateTemplate = (props: any) => {
   const [loading, setLoading] = useState(false);
@@ -23,14 +24,20 @@ export const CreateTemplate = (props: any) => {
     showTimer: false,
   });
 
-  const storeData = async (name: string, value: string) => {
+  const storeData = async (name: string, value: Template) => {
     try {
       setLoading(true);
-      await AsyncStorage.setItem(name, value);
+      debugger;
+      supabase.from('Article').insert({
+        title: name,
+        show_timer: form.showTimer,
+        content: JSON.stringify(value)
+      }).single().then((res) => { console.log(res); debugger; if (res.error) { toast.error("Error Occured: " + JSON.stringify(res.error.message)); } });
       setLoading(false);
       toast.success("Template has been created", {
-        onClose: () => props.navigation.goBack(),
+        autoClose: 2000,
       });
+      props.navigation.navigate(Routes.TEMPLATE_LIST);
     } catch (e) {
       toast.error("Error Occured: " + JSON.stringify(e));
     }
@@ -121,7 +128,7 @@ export const CreateTemplate = (props: any) => {
           loading={loading}
           style={{ width: 200 }}
           mode="contained"
-          onPress={() => storeData(form.name, JSON.stringify(form))}
+          onPress={() => storeData(form.name, form)}
         >
           Create the template
         </Button>
