@@ -81,14 +81,14 @@ function App() {
     <StacksProvider spacing={4}>
       <PaperProvider theme={theme}>
         <React.Fragment>
-          {/* {Platform.OS === "web" ? (
+          {Platform.OS === "web" ? (
             <style type="text/css">{`
         @font-face {
           font-family: 'MaterialCommunityIcons';
           src: url(${require("react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf")}) format('truetype');
         }
       `}</style>
-          ) : null} */}
+          ) : null}
           <ToastContainer />
           <View
             style={{

@@ -1,0 +1,12 @@
+diff --git a/node_modules/react-native-vector-icons/lib/create-icon-set.js b/node_modules/react-native-vector-icons/lib/create-icon-set.jsx
+similarity index 100%
+rename from node_modules/react-native-vector-icons/lib/create-icon-set.js
+rename to node_modules/react-native-vector-icons/lib/create-icon-set.jsx
+diff --git a/node_modules/react-native-vector-icons/lib/create-multi-style-icon-set.js b/node_modules/react-native-vector-icons/lib/create-multi-style-icon-set.jsx
+similarity index 100%
+rename from node_modules/react-native-vector-icons/lib/create-multi-style-icon-set.js
+rename to node_modules/react-native-vector-icons/lib/create-multi-style-icon-set.jsx
+diff --git a/node_modules/react-native-vector-icons/lib/icon-button.js b/node_modules/react-native-vector-icons/lib/icon-button.jsx
+similarity index 100%
+rename from node_modules/react-native-vector-icons/lib/icon-button.js
+rename to node_modules/react-native-vector-icons/lib/icon-button.jsx

@@ -26,7 +26,7 @@ export default defineConfig({
   optimizeDeps: {
     esbuildOptions: {
       mainFields: ["module", "main"],
-      resolveExtensions: [".web.js", ".js", ".ts"],
+      resolveExtensions: [".web.js", ".js", ".ts", ".jsx", ".tsx"],
       plugins: [esbuildCommonjs(["react-native-reanimated"])],
       loader: {
         ".js": "jsx",
@@ -34,7 +34,7 @@ export default defineConfig({
     },
   },
   resolve: {
-    extensions: [".web.tsx", ".web.jsx", ".web.js", ".tsx", ".ts", ".js"],
+    extensions: [".web.tsx", ".web.jsx", ".web.js", ".tsx", ".ts", ".js", ".jsx"],
     alias: {
       "react-native": "react-native-web",
     },
