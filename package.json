@@ -30,7 +30,6 @@
     "react-native-reanimated": "^3.0.2",
     "react-native-safe-area-context": "^4.5.0",
     "react-native-screens": "^3.20.0",
-    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "^0.18.12",
     "react-toastify": "^9.1.2",
     "react-typewriter-effect": "^1.1.0"
