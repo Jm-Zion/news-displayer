@@ -27,12 +27,11 @@ export const CreateTemplate = (props: any) => {
   const storeData = async (name: string, value: Template) => {
     try {
       setLoading(true);
-      debugger;
       supabase.from('Article').insert({
         title: name,
         show_timer: form.showTimer,
         content: JSON.stringify(value)
-      }).single().then((res) => { console.log(res); debugger; if (res.error) { toast.error("Error Occured: " + JSON.stringify(res.error.message)); } });
+      }).single().then((res) => { console.log(res); if (res.error) { toast.error("Error Occured: " + JSON.stringify(res.error.message)); } });
       setLoading(false);
       toast.success("Template has been created", {
         autoClose: 2000,
