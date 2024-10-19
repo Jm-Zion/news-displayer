@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Stack } from "@mobily/stacks";
 import { Button, Divider, Text } from "react-native-paper";
-import { useArticle } from '../hooks/use.article'
+import { useArticle } from "../hooks/use.article";
 import { Routes } from "../../../router/const";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { List } from "react-native-paper";
@@ -28,7 +28,7 @@ function remainingTimeUntilNextSunday(): { minutes: number; seconds: number } {
     10,
     15,
     0,
-    0
+    0,
   );
   const remainingTime = sunday.getTime() - now.getTime();
   const remainingMinutes = Math.floor(remainingTime / (1000 * 60));
@@ -38,7 +38,7 @@ function remainingTimeUntilNextSunday(): { minutes: number; seconds: number } {
 
 const Timer = () => {
   const [timeLeft, setTimeLeft] = React.useState(
-    remainingTimeUntilNextSunday()
+    remainingTimeUntilNextSunday(),
   );
 
   React.useEffect(() => {
@@ -72,7 +72,6 @@ const Timer = () => {
   );
 };
 
-
 export const Present = (props: any) => {
   const handle = useFullScreenHandle();
 
@@ -85,13 +84,13 @@ export const Present = (props: any) => {
       alignY="center"
       style={{
         height: Dimensions.get("screen").height,
-        width: "100%",
+        width: Dimensions.get("screen").width,
         backgroundColor: "white",
       }}
     >
       <FullScreen handle={handle}>
         <Box
-          style={StyleSheet.absoluteFillObject}
+          style={[{ backgroundColor: "white", width: "100%", height: "100%" }]}
           alignSelf="center"
           alignX="center"
         >
@@ -100,7 +99,7 @@ export const Present = (props: any) => {
             style={{ height: "100%", width: "100%" }}
           />
           <Box
-            style={StyleSheet.absoluteFillObject}
+            style={[StyleSheet.absoluteFillObject]}
             alignSelf="center"
             alignX="center"
             alignY="center"
@@ -129,15 +128,15 @@ export const Present = (props: any) => {
                   <Stack space={8}>
                     {s.content != null
                       ? s.content.split("\n").map((text) =>
-                        text !== "" ? (
-                          <Text
-                            style={{ marginLeft: 50 }}
-                            variant="displaySmall"
-                          >
-                            ➡️ {text}
-                          </Text>
-                        ) : null
-                      )
+                          text !== "" ? (
+                            <Text
+                              style={{ marginLeft: 50 }}
+                              variant="displaySmall"
+                            >
+                              ➡️ {text}
+                            </Text>
+                          ) : null,
+                        )
                       : null}
                   </Stack>
                 </Stack>
